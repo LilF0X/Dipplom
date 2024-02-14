@@ -11,17 +11,13 @@ using System.Windows.Forms;
 
 namespace Dipplom
 {
-    public partial class UserLogin : Form
+    public partial class WorkerLoginForm : Form
     {
         ConnectionClass database = new ConnectionClass();
-        public UserLogin()
+
+        public WorkerLoginForm()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,7 +31,7 @@ namespace Dipplom
 
             //Запрос к данным списка пользователей
 
-            string querystring = $"select id, Логин, Пароль from Пользователь where Логин = '{LoginUser}' and Пароль = '{PasswordUser}'";
+            string querystring = $"select id, Логин, Пароль from Рабочий where Логин = '{LoginUser}' and Пароль = '{PasswordUser}'";
 
             SqlCommand command = new SqlCommand(querystring, database.GetSqlConnection());
 
@@ -47,33 +43,15 @@ namespace Dipplom
             if (table.Rows.Count == 1)
             {
                 MessageBox.Show("Вы успешно вошли!", "Успешно!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                UserForm UserForm = new UserForm();
+                WorkerForm WorkerLoginForm = new WorkerForm();
                 this.Hide();
-                UserForm.ShowDialog();
+                WorkerLoginForm.ShowDialog();
                 this.Show();
-
             }
             else
             {
                 MessageBox.Show("Такого аккаунта не существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            WorkerLoginForm UserForm = new WorkerLoginForm();
-            this.Hide();
-            UserForm.ShowDialog();
-            this.Show();
-
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            AdminLoginForm UserForm = new AdminLoginForm();
-            this.Hide();
-            UserForm.ShowDialog();
-            this.Show();
         }
     }
 }
