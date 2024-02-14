@@ -39,7 +39,7 @@ namespace Dipplom
             adapter.SelectCommand = command;
             adapter.Fill(table);
 
-            if (table.Rows.Count == 1)
+            if (table.Rows[0].ItemArray[3].ToString() == "1")
             {
                 MessageBox.Show("Вы успешно вошли!", "Успешно!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 UserForm UserForm = new UserForm();
